@@ -1,7 +1,5 @@
-
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { Search } from "lucide-react";
-import debounce from "lodash/debounce";
 
 interface SearchBoxProps {
   onSearch: (query: string) => void;
@@ -10,17 +8,10 @@ interface SearchBoxProps {
 export const SearchBox = ({ onSearch }: SearchBoxProps) => {
   const [value, setValue] = useState("");
 
-  const debouncedSearch = useCallback(
-    debounce((query: string) => {
-      onSearch(query);
-    }, 300),
-    []
-  );
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value;
     setValue(query);
-    debouncedSearch(query);
+    onSearch(query);
   };
 
   return (
