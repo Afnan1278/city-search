@@ -53,7 +53,7 @@ frontend/
 - **Framework**: Node.js with Express
 - **Testing**: Jest
 - **Code Quality**: ESLint, TypeScript
-- Api Docs: Swagger (/api-docs)
+- **Api Docs**: Swagger (/api-docs)
 
 ### Frontend
 - **Framework**: React 18 with TypeScript
