@@ -47,7 +47,7 @@ export default function Index() {
 
   return (
     <div className="min-h-screen bg-gray-50 p-6">
-      <SearchBox onSearch={handleSearch} />
+      <SearchBox onSearch={handleSearch} query={searchParams.query} />
 
       <div className="table-container fade-in mt-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-100">
