@@ -7,7 +7,7 @@ import { useDebounce } from "@/hooks/use-debounce";
 import CityTable from "../components/CityTable";
 import PaginationComponent from "../components/PaginationComponent";
 
-const ITEMS_PER_PAGE = 10;
+const ITEMS_PER_PAGE = 5;
 
 export default function Index() {
   const [searchParams, setSearchParams] = useState<SearchParams>({

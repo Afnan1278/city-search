@@ -47,16 +47,16 @@ import { City, CitySearchQuery, CitySearchResponseDto } from '../types/cityTypes
 export const getCities = (req: Request, res: Response):any => {
     const { query = "", page = 1, limit = 10 }: CitySearchQuery = req.query as unknown as CitySearchQuery;
   
-  const cities: City[] = searchCities({
+  const resService: {total:number,cities:City[]} = searchCities({
     query: query as string,
     page: Number(page),
     limit: Number(limit),
   });
   const response: CitySearchResponseDto = {
-    cities: cities,
+    cities: resService.cities,
     page: Number(page),
     limit: Number(limit),
-    total: cities.length,
+    total: resService.total,
   };
-  return res.json(response);
+   res.json(response);
 };
