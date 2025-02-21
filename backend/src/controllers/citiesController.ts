@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { NextFunction, Request, Response } from 'express';
 import { searchCities } from '../services/citiesService';
 import { City, CitySearchQuery, CitySearchResponseDto } from '../types/cityTypes';
 /**
@@ -44,19 +44,25 @@ import { City, CitySearchQuery, CitySearchResponseDto } from '../types/cityTypes
  *                 total:
  *                   type: integer
  */
-export const getCities = (req: Request, res: Response):any => {
+export const getCities = (req: Request, res: Response, next: NextFunction): any => {
+  try {
     const { query = "", page = 1, limit = 10 }: CitySearchQuery = req.query as unknown as CitySearchQuery;
-  
-  const resService: {total:number,cities:City[]} = searchCities({
-    query: query as string,
-    page: Number(page),
-    limit: Number(limit),
-  });
-  const response: CitySearchResponseDto = {
-    cities: resService.cities,
-    page: Number(page),
-    limit: Number(limit),
-    total: resService.total,
-  };
-   res.json(response);
+    console.log('query', query);
+    const resService: { total: number, cities: City[] } = searchCities({
+      query: query as string,
+      page: Number(page),
+      limit: Number(limit),
+    });
+
+    const response: CitySearchResponseDto = {
+      cities: resService.cities,
+      page: Number(page),
+      limit: Number(limit),
+      total: resService.total,
+    };
+
+    res.json(response);
+  } catch (error) {
+    next(error);
+  }
 };
